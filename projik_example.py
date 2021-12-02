@@ -92,6 +92,37 @@ def make1(robo, arm, xi, upper):
         request.ik_request.pose_stamped.pose.orientation.w = 0.0
     return request
 
+def make2(robo, arm, xi, upper, mid, center_x = 0.691, center_y = 0.259):
+    # Construct the request
+    request = GetPositionIKRequest()
+    request.ik_request.group_name = arm + "_arm"
+
+    # If a Sawyer does not have a gripper, replace '_gripper_tip' with '_wrist' instead
+    link = arm + "_gripper"
+    if robo == 'sawyer':
+        link += '_tip'
+
+    request.ik_request.ik_link_name = link
+    request.ik_request.attempts = 20
+    request.ik_request.pose_stamped.header.frame_id = "base"
+    #draw top of two
+    if upper == True:
+        y = -20*((xi-center_x)**2)+center_y
+    elif mid == True:
+        # y = xi-.741+.209
+        y = xi - center_x + 0.05 + center_y -0.05
+    else:
+        y = center_y -0.15
+    request.ik_request.pose_stamped.pose.position.x = xi
+    request.ik_request.pose_stamped.pose.position.y = y
+    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.orientation.x = 0.0
+    request.ik_request.pose_stamped.pose.orientation.y = 1.0
+    request.ik_request.pose_stamped.pose.orientation.z = 0.0
+    request.ik_request.pose_stamped.pose.orientation.w = 0.0
+    return request
+
+    
         
 
 
@@ -114,156 +145,221 @@ def main(robo):
     # Create the function used to call the service
     compute_ik = rospy.ServiceProxy('compute_ik', GetPositionIK)
     if robo == 'sawyer':
-    	arm = 'right'
+        arm = 'right'
     switch = True
+    number = 2 #change this to change the number drawn
     while not rospy.is_shutdown():
         raw_input('Press [ Enter ]: ')
+        if number == 2:
+            #Computer vision determines start point.
+            center_x = 0.691
+            center_y = 0.259
+            # for xi in np.linspace(0.641, 0.741, 3):
+            for xi in np.linspace(center_x - 0.05, center_x + 0.05, 3):
+                request = make2(robo, arm, xi, True, False, 0.691, 0.259)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
+
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
+
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
+
+
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
+            for xi in np.linspace(center_x + 0.05, center_x - 0.05, 3):
+                request = make2(robo, arm, xi, False, True, center_x, center_y)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
+
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
+
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
+
+
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
+            for xi in np.linspace(center_x - 0.05, center_x + 0.05, 3):
+                request = make2(robo, arm, xi, False, False, center_x, center_y)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
+
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
+
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
+
+
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
+
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
         # Set the desired orientation for the end effector HERE
-        request = make1(robo, arm, 0.692, False)
-        try:
-            # Send the request to the service
-            response = compute_ik(request)
-            
+        if number==1:
+            request = make1(robo, arm, 0.692, False)
+            try:
+                # Send the request to the service
+                response = compute_ik(request)
+                
 
-            # Print the response HERE
-            # print(response)
-            group = MoveGroupCommander(arm + "_arm")
+                # Print the response HERE
+                # print(response)
+                group = MoveGroupCommander(arm + "_arm")
 
-            # Setting position and orientation target
-            group.set_pose_target(request.ik_request.pose_stamped)
+                # Setting position and orientation target
+                group.set_pose_target(request.ik_request.pose_stamped)
 
-            # TRY THIS
-            # Setting just the position without specifying the orientation
-            # group.set_position_target([0.5, 0.5, 0.0])
+                # TRY THIS
+                # Setting just the position without specifying the orientation
+                # group.set_position_target([0.5, 0.5, 0.0])
 
-            # Plan IK and execute
-            group.go()
-            rospy.sleep(1.0)
+                # Plan IK and execute
+                group.go()
+                rospy.sleep(1.0)
 
-        except rospy.ServiceException, e:
-            print "Service call failed: %s"%e
-        request = make1(robo, arm, 0.692, True)
-        try:
-            # Send the request to the service
-            response = compute_ik(request)
-            
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
+            request = make1(robo, arm, 0.692, True)
+            try:
+                # Send the request to the service
+                response = compute_ik(request)
+                
 
-            # Print the response HERE
-            # print(response)
-            group = MoveGroupCommander(arm + "_arm")
+                # Print the response HERE
+                # print(response)
+                group = MoveGroupCommander(arm + "_arm")
 
-            # Setting position and orientation target
-            group.set_pose_target(request.ik_request.pose_stamped)
+                # Setting position and orientation target
+                group.set_pose_target(request.ik_request.pose_stamped)
 
-            # TRY THIS
-            # Setting just the position without specifying the orientation
-            # group.set_position_target([0.5, 0.5, 0.0])
+                # TRY THIS
+                # Setting just the position without specifying the orientation
+                # group.set_position_target([0.5, 0.5, 0.0])
 
-            # Plan IK and execute
-            group.go()
-            rospy.sleep(1.0)
+                # Plan IK and execute
+                group.go()
+                rospy.sleep(1.0)
 
-        except rospy.ServiceException, e:
-            print "Service call failed: %s"%e
-        #if switch == True:
-            # for xi in np.linspace(0.692, 0.765, 3):
-            #     request = make0(robo, arm, xi, True)
-            #     try:
-            #         # Send the request to the service
-            #         response = compute_ik(request)
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
+        if number == 0:
+            for xi in np.linspace(0.692, 0.765, 3):
+                request = make0(robo, arm, xi, True)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
                     
 
-            #         # Print the response HERE
-            #         # print(response)
-            #         group = MoveGroupCommander(arm + "_arm")
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
 
-            #         # Setting position and orientation target
-            #         group.set_pose_target(request.ik_request.pose_stamped)
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
 
-            #         # TRY THIS
-            #         # Setting just the position without specifying the orientation
-            #         # group.set_position_target([0.5, 0.5, 0.0])
+                    # TRY THIS
+                    # Setting just the position without specifying the orientation
+                    # group.set_position_target([0.5, 0.5, 0.0])
 
-            #         # Plan IK and execute
-            #         group.go()
-            #         rospy.sleep(1.0)
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
 
-            #     except rospy.ServiceException, e:
-            #         print "Service call failed: %s"%e
-            # for xi in np.linspace(0.765, 0.838, 3):
-            #     request = make0(robo, arm, xi, True)
-            #     try:
-            #         # Send the request to the service
-            #         response = compute_ik(request)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
+            for xi in np.linspace(0.765, 0.838, 3):
+                request = make0(robo, arm, xi, True)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
                     
 
-            #         # Print the response HERE
-            #         # print(response)
-            #         group = MoveGroupCommander(arm + "_arm")
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
 
-            #         # Setting position and orientation target
-            #         group.set_pose_target(request.ik_request.pose_stamped)
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
 
-            #         # TRY THIS
-            #         # Setting just the position without specifying the orientation
-            #         # group.set_position_target([0.5, 0.5, 0.0])
+                    # TRY THIS
+                    # Setting just the position without specifying the orientation
+                    # group.set_position_target([0.5, 0.5, 0.0])
 
-            #         # Plan IK and execute
-            #         group.go()
-            #         rospy.sleep(1.0)
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
 
-            #     except rospy.ServiceException, e:
-            #         print "Service call failed: %s"%e
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
 
-            # for xi in np.linspace(0.838, 0.765, 3):
-            #     print("new")
-            #     request = make0(robo, arm, xi, False)
-            #     try:
-            #         # Send the request to the service
-            #         response = compute_ik(request)
+            for xi in np.linspace(0.838, 0.765, 3):
+                print("new")
+                request = make0(robo, arm, xi, False)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
                     
 
-            #         # Print the response HERE
-            #         # print(response)
-            #         group = MoveGroupCommander(arm + "_arm")
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
 
-            #         # Setting position and orientation target
-            #         group.set_pose_target(request.ik_request.pose_stamped)
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
 
-            #         # TRY THIS
-            #         # Setting just the position without specifying the orientation
-            #         # group.set_position_target([0.5, 0.5, 0.0])
+                    # TRY THIS
+                    # Setting just the position without specifying the orientation
+                    # group.set_position_target([0.5, 0.5, 0.0])
 
-            #         # Plan IK and execute
-            #         group.go()
-            #         rospy.sleep(1.0)
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
 
-            #     except rospy.ServiceException, e:
-            #         print "Service call failed: %s"%e
-            # for xi in np.linspace(0.765, 0.692, 3):
-            #     request = make0(robo, arm, xi, False)
-            #     try:
-            #         # Send the request to the service
-            #         response = compute_ik(request)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
+            for xi in np.linspace(0.765, 0.692, 3):
+                request = make0(robo, arm, xi, False)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
                     
 
-            #         # Print the response HERE
-            #         # print(response)
-            #         group = MoveGroupCommander(arm + "_arm")
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
 
-            #         # Setting position and orientation target
-            #         group.set_pose_target(request.ik_request.pose_stamped)
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
 
-            #         # TRY THIS
-            #         # Setting just the position without specifying the orientation
-            #         # group.set_position_target([0.5, 0.5, 0.0])
+                    # TRY THIS
+                    # Setting just the position without specifying the orientation
+                    # group.set_position_target([0.5, 0.5, 0.0])
 
-            #         # Plan IK and execute
-            #         group.go()
-            #         rospy.sleep(1.0)
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
 
-            #     except rospy.ServiceException, e:
-            #         print "Service call failed: %s"%e
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
 # Python's syntax for a main() method
 if __name__ == '__main__':
     if sys.argv[1] == 'sawyer':
