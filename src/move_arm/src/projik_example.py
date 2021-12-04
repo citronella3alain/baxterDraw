@@ -316,11 +316,11 @@ def make8(robo, arm, xi, upper, mid, center_x = 0.6566, center_y = 0.2235):
     if upper == True and mid ==True:
         y = -30*((xi-center_x+0.0344)**2)+center_y+0.0355
     elif upper == False and mid == False:
-        y = 30*(xi - ((center_x+0.0344)*1.1))**2 + center_y       # y = xi-.741+.209
+        y = 30*(xi - (center_x+0.0344)*1.1)**2 + center_y - 0.0355       # y = xi-.741+.209
     elif upper == False and mid == True:
         y = -30*(xi - ((center_x+0.0344)*1.1))**2 + center_y +0.0355
     elif upper == True and mid == False:
-        y = 30 * (x-center_x+0.0344)**2 + center_y
+        y = 30 * (xi-center_x+0.0344)**2 + center_y - 0.0355
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
     request.ik_request.pose_stamped.pose.position.z = -0.147
@@ -346,7 +346,7 @@ def make9(robo, arm, xi, upper, mid, center_x = 0.6566, center_y = 0.2235):
     if upper == True and mid ==True:
         y = -30*((xi-center_x)**2)+center_y
     elif upper == False and mid == False:
-        y = 30 * (x-center_x)**2 + center_y + 0.071       # y = xi-.741+.209
+        y = 30 * (xi-center_x)**2 + center_y + 0.071       # y = xi-.741+.209
     elif upper == False and mid == True:
         y = -30 * ((xi-center_x)**2) + center_y
     elif upper == True and mid == False:
@@ -380,7 +380,7 @@ def main(robo):
     if robo == 'sawyer':
         arm = 'right'
     switch = True
-    number = 7 #change this to change the number drawn
+    number = 8 #change this to change the number drawn
     while not rospy.is_shutdown():
         raw_input('Press [ Enter ]: ')
         if number == 9:
@@ -405,8 +405,10 @@ def main(robo):
                     # Plan IK and execute
                     group.go()
                     rospy.sleep(1.0)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
             for xi in np.linspace(center_x + 0.0688, center_x, 3):
-                request = make9(robo, arm, xi, upper=False, mid=False, center_x, center_y)
+                request = make9(robo, arm, xi, False, False, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -422,8 +424,10 @@ def main(robo):
                     # Plan IK and execute
                     group.go()
                     rospy.sleep(1.0)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
             for xi in np.linspace(center_x, center_x + 0.0344, 3):
-                request = make9(robo, arm, xi, upper=False, mid=True, center_x, center_y)
+                request = make9(robo, arm, xi, False, True, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -443,7 +447,7 @@ def main(robo):
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
             for xi in np.linspace(center_x + 0.0344, center_x + 0.1379, 3):
-                request = make9(robo, arm, xi, upper=True, mid=False, center_x, center_y)
+                request = make9(robo, arm, xi, True, False, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -464,11 +468,11 @@ def main(robo):
                     print "Service call failed: %s"%e
         if number == 8:
             #Computer vision determines start point.
-            center_x = 0.6566
-            center_y = 0.2235
+            center_x = 0.691
+            center_y = 0.259
             # for xi in np.linspace(0.641, 0.741, 3):
             for xi in np.linspace(center_x, center_x + 0.0688, 3):
-                request = make8(robo, arm, xi, upper=True, mid=True, center_x = 0.691, center_y = 0.259)
+                request = make8(robo, arm, xi, True, True, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -484,8 +488,10 @@ def main(robo):
                     # Plan IK and execute
                     group.go()
                     rospy.sleep(1.0)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
             for xi in np.linspace(center_x + 0.0688, center_x + 0.1379, 3):
-                request = make8(robo, arm, xi, upper=False, mid=False, center_x, center_y)
+                request = make8(robo, arm, xi, False, False, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -501,8 +507,10 @@ def main(robo):
                     # Plan IK and execute
                     group.go()
                     rospy.sleep(1.0)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
             for xi in np.linspace(center_x + 0.1379, center_x + 0.0688, 3):
-                request = make8(robo, arm, xi, upper=False, mid=True, center_x, center_y)
+                request = make8(robo, arm, xi, False, True, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -522,7 +530,7 @@ def main(robo):
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
             for xi in np.linspace(center_x + 0.0688, center_x, 3):
-                request = make8(robo, arm, xi, upper=True, mid=False, center_x, center_y)
+                request = make8(robo, arm, xi, True, False, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
