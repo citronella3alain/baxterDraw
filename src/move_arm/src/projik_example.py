@@ -61,7 +61,7 @@ def make0(robo, arm, xi, upper):
     request.ik_request.pose_stamped.pose.orientation.w = 0.0
     return request
 
-def make1(robo, arm, xi, upper):
+def make1(robo, arm, xi, xc, yc):
     # Construct the request
     request = GetPositionIKRequest()
     request.ik_request.group_name = arm + "_arm"
@@ -74,22 +74,14 @@ def make1(robo, arm, xi, upper):
     request.ik_request.ik_link_name = link
     request.ik_request.attempts = 20
     request.ik_request.pose_stamped.header.frame_id = "base"
-    if upper == False:
-        request.ik_request.pose_stamped.pose.position.x = 0.692
-        request.ik_request.pose_stamped.pose.position.y = 0.093
-        request.ik_request.pose_stamped.pose.position.z = -0.147        
-        request.ik_request.pose_stamped.pose.orientation.x = 0.0
-        request.ik_request.pose_stamped.pose.orientation.y = 1.0
-        request.ik_request.pose_stamped.pose.orientation.z = 0.0
-        request.ik_request.pose_stamped.pose.orientation.w = 0.0
-    else:
-        request.ik_request.pose_stamped.pose.position.x = 0.838
-        request.ik_request.pose_stamped.pose.position.y = 0.093
-        request.ik_request.pose_stamped.pose.position.z = -0.147        
-        request.ik_request.pose_stamped.pose.orientation.x = 0.0
-        request.ik_request.pose_stamped.pose.orientation.y = 1.0
-        request.ik_request.pose_stamped.pose.orientation.z = 0.0
-        request.ik_request.pose_stamped.pose.orientation.w = 0.0
+    y = yc+0.059
+    request.ik_request.pose_stamped.pose.position.x = xi
+    request.ik_request.pose_stamped.pose.position.y = y
+    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.orientation.x = 0.0
+    request.ik_request.pose_stamped.pose.orientation.y = 1.0
+    request.ik_request.pose_stamped.pose.orientation.z = 0.0
+    request.ik_request.pose_stamped.pose.orientation.w = 0.0
     return request
 
 def make2(robo, arm, xi, upper, mid, center_x = 0.691, center_y = 0.259):
@@ -106,7 +98,9 @@ def make2(robo, arm, xi, upper, mid, center_x = 0.691, center_y = 0.259):
     request.ik_request.attempts = 20
     request.ik_request.pose_stamped.header.frame_id = "base"
     #draw top of two
-    if upper == True:
+    if upper == True and mid == True:
+        y = -np.sqrt((-xi+center_x)/-20) + center_y
+    elif upper == True:
         # y = -20*((xi-center_x)**2)+center_y
         y = np.sqrt((-xi+center_x)/-20) + center_y
     elif mid == True:
@@ -174,7 +168,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
         request.ik_request.pose_stamped.pose.orientation.w = 0.0
     if xi == 1:
-        request.ik_request.pose_stamped.pose.position.x = xc+0.0788
+        request.ik_request.pose_stamped.pose.position.x = xc+(0.0788/2.0)
         request.ik_request.pose_stamped.pose.position.y = yc
         request.ik_request.pose_stamped.pose.position.z = -0.147
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
@@ -183,14 +177,14 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
         request.ik_request.pose_stamped.pose.orientation.w = 0.0
     if xi == 2:
         request.ik_request.pose_stamped.pose.position.x = xc+0.0788
-        request.ik_request.pose_stamped.pose.position.y = yc + 0.059
+        request.ik_request.pose_stamped.pose.position.y = yc
         request.ik_request.pose_stamped.pose.position.z = -0.147
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
         request.ik_request.pose_stamped.pose.orientation.w = 0.0
     if xi == 3:
-        request.ik_request.pose_stamped.pose.position.x = xc
+        request.ik_request.pose_stamped.pose.position.x = xc+0.0788
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
         request.ik_request.pose_stamped.pose.position.z = -0.147
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
@@ -198,6 +192,22 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
         request.ik_request.pose_stamped.pose.orientation.w = 0.0
     if xi == 4:
+        request.ik_request.pose_stamped.pose.position.x = xc
+        request.ik_request.pose_stamped.pose.position.y = yc + 0.059
+        request.ik_request.pose_stamped.pose.position.z = -0.147
+        request.ik_request.pose_stamped.pose.orientation.x = 0.0
+        request.ik_request.pose_stamped.pose.orientation.y = 1.0
+        request.ik_request.pose_stamped.pose.orientation.z = 0.0
+        request.ik_request.pose_stamped.pose.orientation.w = 0.0
+    if xi == 5:
+        request.ik_request.pose_stamped.pose.position.x = xc+(0.1577/2.0)
+        request.ik_request.pose_stamped.pose.position.y = yc + 0.059
+        request.ik_request.pose_stamped.pose.position.z = -0.147
+        request.ik_request.pose_stamped.pose.orientation.x = 0.0
+        request.ik_request.pose_stamped.pose.orientation.y = 1.0
+        request.ik_request.pose_stamped.pose.orientation.z = 0.0
+        request.ik_request.pose_stamped.pose.orientation.w = 0.0
+    if xi == 6:
         request.ik_request.pose_stamped.pose.position.x = xc+0.1577
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
         request.ik_request.pose_stamped.pose.position.z = -0.147
@@ -227,7 +237,7 @@ def make5(robo, arm, xi, upper, mid, xc=0.6467, yc=0.2):
     elif mid == True:
         y=yc
     else:
-        y= round(-30*((xi-(xc*1.1))**2) +yc, 3)
+        y= round(-30*((xi-((xc+0.0443)*1.1))**2) +yc +0.059, 3)
     
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
@@ -238,7 +248,8 @@ def make5(robo, arm, xi, upper, mid, xc=0.6467, yc=0.2):
     request.ik_request.pose_stamped.pose.orientation.w = 0.0
     return request
 
-def make6(robo, arm, xi, upper, mid, xc= 0.73,yc= 1.0):
+def make6(robo, arm, xi, upper, center_x = 0.6566, center_y = 0.2235):
+    # Construct the request
     request = GetPositionIKRequest()
     request.ik_request.group_name = arm + "_arm"
 
@@ -250,19 +261,17 @@ def make6(robo, arm, xi, upper, mid, xc= 0.73,yc= 1.0):
     request.ik_request.ik_link_name = link
     request.ik_request.attempts = 20
     request.ik_request.pose_stamped.header.frame_id = "base"
-    b = -0.1 
-    a = -0.27
-    k = yc
-    h = xc
-    xi = np.round(xi, 3)
-    if upper == True:
-        #math equatio
-        y = np.round((-np.sqrt((b**2)-((b**2/a**2)*((xi-h)**2))))+k, 3)
-    else:
-        if mid==True:
-            y= np.round(np.sqrt((0.1**2)-(xi-xc)**2)+yc, 3)
-        else:
-            y= np.round(-np.sqrt((0.1**2)-(xi-xc)**2)+yc, 3)
+    #draw top of two
+    if upper == 0:
+        y = 30 * (xi-(center_x+0.0344))**2 + center_y - 0.0355
+    elif upper == 1:
+        y=center_y-0.0355
+    elif upper == 2:
+        y = 30*(xi - ((center_x+0.0344)*1.1))**2 + center_y - 0.0355 
+    elif upper == 3:
+        y = -30*(xi - ((center_x+0.0344)*1.1))**2 + center_y +0.0355
+    elif upper==4:
+        y = 30*(xi - ((center_x+0.0344)*1.1))**2 + center_y - 0.0355 
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
     request.ik_request.pose_stamped.pose.position.z = -0.147
@@ -314,13 +323,13 @@ def make8(robo, arm, xi, upper, mid, center_x = 0.6566, center_y = 0.2235):
     request.ik_request.pose_stamped.header.frame_id = "base"
     #draw top of two
     if upper == True and mid ==True:
-        y = -30*((xi-center_x+0.0344)**2)+center_y+0.0355
+        y = -30*((xi-(center_x+0.0344))**2)+center_y+0.0355
     elif upper == False and mid == False:
-        y = 30*(xi - (center_x+0.0344)*1.1)**2 + center_y - 0.0355       # y = xi-.741+.209
+        y = 30*(xi - ((center_x+0.0344)*1.1))**2 + center_y - 0.0355       # y = xi-.741+.209
     elif upper == False and mid == True:
         y = -30*(xi - ((center_x+0.0344)*1.1))**2 + center_y +0.0355
     elif upper == True and mid == False:
-        y = 30 * (xi-center_x+0.0344)**2 + center_y - 0.0355
+        y = 30 * (xi-(center_x+0.0344))**2 + center_y - 0.0355
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
     request.ik_request.pose_stamped.pose.position.z = -0.147
@@ -344,11 +353,11 @@ def make9(robo, arm, xi, upper, mid, center_x = 0.6566, center_y = 0.2235):
     request.ik_request.pose_stamped.header.frame_id = "base"
     #draw top of two
     if upper == True and mid ==True:
-        y = -30*((xi-center_x)**2)+center_y
+        y = -30*((xi-(center_x+0.0344))**2)+center_y+0.0355
     elif upper == False and mid == False:
-        y = 30 * (xi-center_x)**2 + center_y + 0.071       # y = xi-.741+.209
+        y = 30 * (xi-(center_x+0.0344))**2 + center_y - 0.0355       # y = xi-.741+.209
     elif upper == False and mid == True:
-        y = -30 * ((xi-center_x)**2) + center_y
+        y = -30*((xi-(center_x+0.0344))**2)+center_y+0.0355
     elif upper == True and mid == False:
         y = center_y + 0.0355
     request.ik_request.pose_stamped.pose.position.x = xi
@@ -380,7 +389,7 @@ def main(robo):
     if robo == 'sawyer':
         arm = 'right'
     switch = True
-    number = 8 #change this to change the number drawn
+    number = 2 #change this to change the number drawn
     while not rospy.is_shutdown():
         raw_input('Press [ Enter ]: ')
         if number == 9:
@@ -388,25 +397,24 @@ def main(robo):
             center_x = 0.6566
             center_y = 0.2235
             # for xi in np.linspace(0.641, 0.741, 3):
-            for xi in np.linspace(center_x + 0.0344, center_x + 0.0688, 3):
-                request = make9(robo, arm, xi, upper=True, mid=True, center_x = 0.691, center_y = 0.259)
-                try:
-                    # Send the request to the service
-                    response = compute_ik(request)
+            request = make9(robo, arm, center_x + 0.0344, upper=True, mid=True, center_x = 0.691, center_y = 0.259)
+            try:
+                # Send the request to the service
+                response = compute_ik(request)
 
-                    # Print the response HERE
-                    # print(response)
-                    group = MoveGroupCommander(arm + "_arm")
+                # Print the response HERE
+                # print(response)
+                group = MoveGroupCommander(arm + "_arm")
 
-                    # Setting position and orientation target
-                    group.set_pose_target(request.ik_request.pose_stamped)
+                # Setting position and orientation target
+                group.set_pose_target(request.ik_request.pose_stamped)
 
 
-                    # Plan IK and execute
-                    group.go()
-                    rospy.sleep(1.0)
-                except rospy.ServiceException, e:
-                    print "Service call failed: %s"%e
+                # Plan IK and execute
+                group.go()
+                rospy.sleep(1.0)
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
             for xi in np.linspace(center_x + 0.0688, center_x, 3):
                 request = make9(robo, arm, xi, False, False, center_x, center_y)
                 try:
@@ -591,10 +599,12 @@ def main(robo):
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
         if number == 6:
-            center_x = 0.6467
-            center_y = 0.2
-            for xi in np.linspace(center_x-0.27, center_x, 3):
-                request = make6(robo, arm, xi, True, False, center_x, center_y)
+            #Computer vision determines start point.
+            center_x = 0.691
+            center_y = 0.259
+            # for xi in np.linspace(0.641, 0.741, 3):
+            for xi in np.linspace(center_x, center_x + 0.0344, 3):
+                request = make6(robo, arm, xi, 0, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -612,8 +622,8 @@ def main(robo):
                     rospy.sleep(1.0)
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
-            for xi in np.linspace(center_x, center_x+0.1, 3):
-                request = make6(robo, arm, xi, False, False, center_x, center_y)
+            for xi in np.linspace(center_x + 0.0344, center_x + 0.1035, 3):
+                request = make6(robo, arm, xi, 1, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -631,8 +641,8 @@ def main(robo):
                     rospy.sleep(1.0)
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
-            for xi in np.linspace(center_x+0.1, center_x-0.1, 3):
-                request = make6(robo, arm, xi, False, True, center_x, center_y)
+            for xi in np.linspace(center_x + 0.1035, center_x + 0.1379, 3):
+                request = make6(robo, arm, xi, 2, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -648,10 +658,11 @@ def main(robo):
                     # Plan IK and execute
                     group.go()
                     rospy.sleep(1.0)
+
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
-            for xi in np.linspace(center_x-0.1, center_x, 3):
-                request = make6(robo, arm, xi, False, False, center_x, center_y)
+            for xi in np.linspace(center_x + 0.1379, center_x + 0.0688, 3):
+                request = make6(robo, arm, xi, 3, center_x, center_y)
                 try:
                     # Send the request to the service
                     response = compute_ik(request)
@@ -667,6 +678,27 @@ def main(robo):
                     # Plan IK and execute
                     group.go()
                     rospy.sleep(1.0)
+
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
+            for xi in np.linspace(center_x + 0.0688, center_x + 0.1035, 3):
+                request = make6(robo, arm, xi, 4, center_x, center_y)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
+
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
+
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
+
+
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
+
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
         if number == 5:
@@ -710,7 +742,7 @@ def main(robo):
                     rospy.sleep(1.0)
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
-            for xi in np.linspace(center_x+0.0691, center_x+0.1577, 3):
+            for xi in np.linspace(center_x+0.0691, center_x+0.1577, 5):
                 request = make5(robo, arm, xi, False, False, center_x, center_y)
                 try:
                     # Send the request to the service
@@ -732,7 +764,7 @@ def main(robo):
         if number == 4:
             center_x = 0.6467
             center_y = 0.2
-            for xi in range(5):
+            for xi in range(7):
                 request = make4(robo, arm, xi, center_x, center_y)
                 try:
                     # Send the request to the service
@@ -816,6 +848,25 @@ def main(robo):
             center_x = 0.691
             center_y = 0.259
             # for xi in np.linspace(0.641, 0.741, 3):
+            for xi in np.linspace(center_x + 0.05, center_x, 3):
+                request = make2(robo, arm, xi, True, True, center_x, center_y)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
+
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
+
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
+
+
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
             for xi in np.linspace(center_x, center_x + 0.05, 3):
                 request = make2(robo, arm, xi, True, False, center_x, center_y)
                 try:
@@ -876,52 +927,27 @@ def main(robo):
                     print "Service call failed: %s"%e
         # Set the desired orientation for the end effector HERE
         if number==1:
-            request = make1(robo, arm, 0.692, False)
-            try:
-                # Send the request to the service
-                response = compute_ik(request)
-                
+            center_x = 0.6467
+            center_y = 0.2
+            for xi in np.linspace(center_x, center_x+0.1577, 4):
+                request = make1(robo, arm, xi, center_x, center_y)
+                try:
+                    # Send the request to the service
+                    response = compute_ik(request)
 
-                # Print the response HERE
-                # print(response)
-                group = MoveGroupCommander(arm + "_arm")
+                    # Print the response HERE
+                    # print(response)
+                    group = MoveGroupCommander(arm + "_arm")
 
-                # Setting position and orientation target
-                group.set_pose_target(request.ik_request.pose_stamped)
+                    # Setting position and orientation target
+                    group.set_pose_target(request.ik_request.pose_stamped)
 
-                # TRY THIS
-                # Setting just the position without specifying the orientation
-                # group.set_position_target([0.5, 0.5, 0.0])
 
-                # Plan IK and execute
-                group.go()
-                rospy.sleep(1.0)
-
-            except rospy.ServiceException, e:
-                print "Service call failed: %s"%e
-            request = make1(robo, arm, 0.692, True)
-            try:
-                # Send the request to the service
-                response = compute_ik(request)
-                
-
-                # Print the response HERE
-                # print(response)
-                group = MoveGroupCommander(arm + "_arm")
-
-                # Setting position and orientation target
-                group.set_pose_target(request.ik_request.pose_stamped)
-
-                # TRY THIS
-                # Setting just the position without specifying the orientation
-                # group.set_position_target([0.5, 0.5, 0.0])
-
-                # Plan IK and execute
-                group.go()
-                rospy.sleep(1.0)
-
-            except rospy.ServiceException, e:
-                print "Service call failed: %s"%e
+                    # Plan IK and execute
+                    group.go()
+                    rospy.sleep(1.0)
+                except rospy.ServiceException, e:
+                    print "Service call failed: %s"%e
         if number == 0:
             for xi in np.linspace(0.692, 0.765, 3):
                 request = make0(robo, arm, xi, True)
