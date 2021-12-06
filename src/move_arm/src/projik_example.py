@@ -54,7 +54,7 @@ def make0(robo, arm, xi, upper):
     #switch = not switch
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.147        
+    request.ik_request.pose_stamped.pose.position.z = -0.1        
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -77,7 +77,7 @@ def make1(robo, arm, xi, xc, yc):
     y = yc+0.059
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.position.z = -0.1
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -113,7 +113,7 @@ def make2(robo, arm, xi, upper, mid, center_x = 0.691, center_y = 0.259):
         xi = center_x + .15
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.position.z = -0.1
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -140,7 +140,7 @@ def make3(robo, arm, xi, upper, xc= 0.691,yc= 0.259):
     
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.position.z = -0.1
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -162,7 +162,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 0:
         request.ik_request.pose_stamped.pose.position.x = xc
         request.ik_request.pose_stamped.pose.position.y = yc
-        request.ik_request.pose_stamped.pose.position.z = -0.147
+        request.ik_request.pose_stamped.pose.position.z = -0.1
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -170,7 +170,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 1:
         request.ik_request.pose_stamped.pose.position.x = xc+(0.0788/2.0)
         request.ik_request.pose_stamped.pose.position.y = yc
-        request.ik_request.pose_stamped.pose.position.z = -0.147
+        request.ik_request.pose_stamped.pose.position.z = -0.1
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -178,7 +178,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 2:
         request.ik_request.pose_stamped.pose.position.x = xc+0.0788
         request.ik_request.pose_stamped.pose.position.y = yc
-        request.ik_request.pose_stamped.pose.position.z = -0.147
+        request.ik_request.pose_stamped.pose.position.z = -0.1
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -186,7 +186,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 3:
         request.ik_request.pose_stamped.pose.position.x = xc+0.0788
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
-        request.ik_request.pose_stamped.pose.position.z = -0.147
+        request.ik_request.pose_stamped.pose.position.z = -0.1
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -194,7 +194,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 4:
         request.ik_request.pose_stamped.pose.position.x = xc
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
-        request.ik_request.pose_stamped.pose.position.z = -0.147
+        request.ik_request.pose_stamped.pose.position.z = -0.1
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -202,7 +202,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 5:
         request.ik_request.pose_stamped.pose.position.x = xc+(0.1577/2.0)
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
-        request.ik_request.pose_stamped.pose.position.z = -0.147
+        request.ik_request.pose_stamped.pose.position.z = -0.1
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -210,7 +210,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 6:
         request.ik_request.pose_stamped.pose.position.x = xc+0.1577
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
-        request.ik_request.pose_stamped.pose.position.z = -0.147
+        request.ik_request.pose_stamped.pose.position.z = -0.1
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -241,7 +241,7 @@ def make5(robo, arm, xi, upper, mid, xc=0.6467, yc=0.2):
     
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.position.z = -0.1
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -274,7 +274,7 @@ def make6(robo, arm, xi, upper, center_x = 0.6566, center_y = 0.2235):
         y = 30*(xi - ((center_x+0.0344)*1.1))**2 + center_y - 0.0355 
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.position.z = -0.1
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -301,7 +301,7 @@ def make7(robo, arm, xi, upper, xc= 0.6467,yc= 0.2):
         y = yc+0.059
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.position.z = -0.1
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -332,7 +332,7 @@ def make8(robo, arm, xi, upper, mid, center_x = 0.6566, center_y = 0.2235):
         y = 30 * (xi-(center_x+0.0344))**2 + center_y - 0.0355
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.position.z = -0.1
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -362,7 +362,7 @@ def make9(robo, arm, xi, upper, mid, center_x = 0.6566, center_y = 0.2235):
         y = center_y + 0.0355
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.147
+    request.ik_request.pose_stamped.pose.position.z = -0.1
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -389,7 +389,7 @@ def main(robo):
     if robo == 'sawyer':
         arm = 'right'
     switch = True
-    number = 2 #change this to change the number drawn
+    number = 0 #change this to change the number drawn
     while not rospy.is_shutdown():
         raw_input('Press [ Enter ]: ')
         if number == 9:
