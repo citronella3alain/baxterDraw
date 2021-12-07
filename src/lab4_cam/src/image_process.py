@@ -6,6 +6,8 @@ import cv2, time, sys
 from cv_bridge import CvBridge, CvBridgeError
 import numpy as np
 from numpy.linalg import *
+import requests
+import json
 
 # Create a CvBridge to convert ROS messages to OpenCV images
 bridge = CvBridge()
@@ -48,7 +50,13 @@ if __name__ == '__main__':
 
     #   # Display the CV Image   
       cv2.imshow("CV Image", np_image)
-   
+      api_key = json.load(open('app_key.json',))
+      r = requests.post("https://api.mathpix.com/v3/latex",
+      files={"file": cv2.imencode('.jpg', np_image)[1].tobytes()},
+      data={"options_json": json.dumps({
+          "formats": ["latex_simplified", "asciimath"]})}, headers=api_key)
+      print(json.dumps(r.json(), indent=4, sort_keys=True))
+
       # When done, get rid of windows and start over
       # cv2.destroyAllWindows()
 
