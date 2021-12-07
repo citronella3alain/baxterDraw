@@ -8,6 +8,11 @@ import numpy as np
 from numpy.linalg import *
 import requests
 import json
+import re
+from process_latex import process_sympy
+import sympy
+
+
 
 # Create a CvBridge to convert ROS messages to OpenCV images
 bridge = CvBridge()
@@ -33,6 +38,7 @@ if __name__ == '__main__':
   while not rospy.is_shutdown():
     try:
       # Waits for a key input to continue
+    
       raw_input('Press enter to capture an image:')
     except KeyboardInterrupt:
       print 'Break from raw_input'
@@ -50,12 +56,19 @@ if __name__ == '__main__':
 
     #   # Display the CV Image   
       cv2.imshow("CV Image", np_image)
-      api_key = json.load(open('app_key.json',))
+      api_key = json.load(open('/home/cc/ee106a/fl21/class/ee106a-aeg/ros_workspaces/baxterDraw/src/lab4_cam/src/app_key.json',))
       r = requests.post("https://api.mathpix.com/v3/latex",
       files={"file": cv2.imencode('.jpg', np_image)[1].tobytes()},
       data={"options_json": json.dumps({
           "formats": ["latex_simplified", "asciimath"]})}, headers=api_key)
       print(json.dumps(r.json(), indent=4, sort_keys=True))
+      print("__________________________________")
+      hopefully_dict = json.loads(json.dumps(r.json(), indent=4, sort_keys=True))
+
+
+      latex_vals = re.findall(r"'([^']+)'", hopefully_dict['latex_simplified'])
+
+      hopefully_sympy = process_sympy(latex_vals)      
 
       # When done, get rid of windows and start over
       # cv2.destroyAllWindows()
