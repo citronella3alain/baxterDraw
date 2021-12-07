@@ -1,4 +1,7 @@
 #!/usr/bin/env python
+
+#Create a virtual environment to use this file:
+# source env/bin/activate
 import rospy
 from sensor_msgs.msg import Image
 from lab4_cam.srv import ImageSrv, ImageSrvResponse
@@ -9,8 +12,8 @@ from numpy.linalg import *
 import requests
 import json
 import re
-from process_latex import process_sympy
-import sympy
+# from process_latex import process_sympy
+# import sympy
 
 
 
@@ -41,7 +44,7 @@ if __name__ == '__main__':
     
       raw_input('Press enter to capture an image:')
     except KeyboardInterrupt:
-      print 'Break from raw_input'
+      print('Break from raw_input')
       break
     
     try:
@@ -65,20 +68,21 @@ if __name__ == '__main__':
       print("__________________________________")
       hopefully_dict = json.loads(json.dumps(r.json(), indent=4, sort_keys=True))
 
+      print(hopefully_dict)
+      latex_vals = hopefully_dict['latex_simplified']
+      print(latex_vals)
 
-      latex_vals = re.findall(r"'([^']+)'", hopefully_dict['latex_simplified'])
-
-      hopefully_sympy = process_sympy(latex_vals)      
+      # hopefully_sympy = process_sympy(latex_vals)      
 
       # When done, get rid of windows and start over
       # cv2.destroyAllWindows()
 
     except KeyboardInterrupt:
-      print 'Keyboard Interrupt, exiting'
+      print('Keyboard Interrupt, exiting')
       break
 
     # Catch if anything went wrong with the Image Service
-    except rospy.ServiceException, e:
-      print "image_process: Service call failed: %s"%e
+    except rospy.ServiceException as e:
+      print ("image_process: Service call failed: %s"%e)
     
   cv2.destroyAllWindows()
