@@ -1,6 +1,4 @@
 #!/usr/bin/env python
-
-# LAB 4: https://pages.github.berkeley.edu/EECS-106/fa21-site/assets/labs/Lab_4__Intro_to_TurtleBot.pdf
 import rospy
 
 from sensor_msgs.msg import Image
@@ -29,21 +27,19 @@ class ImgService:
     self.lastImage = None;
 
     #Initialize the node
-    rospy.init_node('cam_listener')
+    rospy.init_node('cam_listener2')
 
     #Subscribe to the image topic
-    rospy.Subscriber("/usb_cam/image_raw", Image, self.imgReceived)
-    #rospy.Subscriber("/io/internal_camera/right_hand_camera/image_raw", Image, self.imgReceived)
+    #rospy.Subscriber("/usb_cam/image_raw", Image, self.imgReceived)
+    rospy.Subscriber("/io/internal_camera/right_hand_camera/image_raw", Image, self.imgReceived)
 
     #Create the service
-    rospy.Service('last_image', ImageSrv, self.getLastImage)
+    rospy.Service('last_image2', ImageSrv, self.getLastImage)
 
+  def run(self):
     rospy.spin()
-
-  # def run(self):
-  #   rospy.spin()
 
 #Python's syntax for a main() method
 if __name__ == '__main__':
   node = ImgService()
-  # node.run()
+  node.run()

@@ -12,6 +12,8 @@ from numpy.linalg import *
 import requests
 import json
 import re
+import tf
+from geometry_msgs.msg import PoseStamped
 
 from moveit_msgs.srv import GetPositionIK, GetPositionIKRequest, GetPositionIKResponse
 from geometry_msgs.msg import PoseStamped
@@ -429,6 +431,23 @@ if robo == 'sawyer':
     arm = 'right'
 switch = True
 number = 0 #change this to change the number drawn
+
+# transform = lookupTransform('right_hand_camera', 'base')
+
+
+# HAVE VALUES FOR X, Y, Z 
+point_msg = PointStamped()
+point_msg.header.frame_id = 'right_hand_camera'
+point_msg.point.x = x # x coordinate in camera frame 
+point_msg.point.y = y # y coordinate in camera frame 
+point_msg.point.z = z # z coordinate in camera frame 
+base_point = tf.transformPoint('base', point_msg)
+
+
+
+
+
+
 
 while not rospy.is_shutdown():
     try:
