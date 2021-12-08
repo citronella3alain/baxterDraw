@@ -215,8 +215,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
         request.ik_request.pose_stamped.pose.orientation.w = 0.0
-    return request
-        
+    return request   
 
 def make5(robo, arm, xi, upper, mid, xc=0.6467, yc=0.2):
     request = GetPositionIKRequest()
@@ -309,6 +308,7 @@ def make7(robo, arm, xi, upper, xc= 0.6467,yc= 0.2):
     return request
 
 def make8(robo, arm, xi, upper, mid, center_x = 0.6566, center_y = 0.2235):
+    
     # Construct the request
     request = GetPositionIKRequest()
     request.ik_request.group_name = arm + "_arm"
