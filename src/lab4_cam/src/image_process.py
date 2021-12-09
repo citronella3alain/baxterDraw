@@ -437,12 +437,12 @@ number = 0 #change this to change the number drawn
 
 
 # HAVE VALUES FOR X, Y, Z
-point_msg = PointStamped()
-point_msg.header.frame_id = 'right_hand_camera'
-point_msg.point.x = x # x coordinate in camera frame
-point_msg.point.y = y # y coordinate in camera frame
-point_msg.point.z = z # z coordinate in camera frame
-base_point = tf.transformPoint('base', point_msg)
+# point_msg = PointStamped()
+# point_msg.header.frame_id = 'right_hand_camera'
+# point_msg.point.x = x # x coordinate in camera frame
+# point_msg.point.y = y # y coordinate in camera frame
+# point_msg.point.z = z # z coordinate in camera frame
+# base_point = tf.transformPoint('base', point_msg)
 
 
 
@@ -507,6 +507,8 @@ while not rospy.is_shutdown():
         # When done, get rid of windows and start over
         # cv2.destroyAllWindows()
         raw_input('Press [ Enter ]: ')
+        center_x = 0.872
+        center_y = -0.042
         if number == 'eq':
             #need board size in coordinates, origin for calculating offset, window size we want to show, aspect ratio
             # x = -y and y = x in the robot's frame to draw the function facing us
@@ -582,9 +584,12 @@ while not rospy.is_shutdown():
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
         else:
-            for digit in number:
+            for digit in str(number):
                 ### Lift hand
                 ##spacing between numbers
+                digit = int(digit)
+                print(digit)
+                print('this is the digit')
                 center_y += 0.1
                 center_x = center_x
                 z = -0.05
@@ -1259,9 +1264,9 @@ while not rospy.is_shutdown():
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
-        except KeyboardInterrupt:
-            print('Keyboard Interrupt, exiting')
-            break
+    except KeyboardInterrupt:
+        print('Keyboard Interrupt, exiting')
+        break
 
     # Catch if anything went wrong with the Image Service
     except rospy.ServiceException as e:
