@@ -40,7 +40,7 @@ def make0(robo, arm, xi, upper, center_x, center_y):
 
     # print('Opening...')
     # right_gripper.open()
-    # rospy.sleep(1.0)
+    # 
     # print('Done!')
     b = 0.048
     a = 0.068
@@ -71,7 +71,7 @@ def make0(robo, arm, xi, upper, center_x, center_y):
     #switch = not switch
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.145
+    request.ik_request.pose_stamped.pose.position.z = -0.13
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -94,7 +94,7 @@ def make1(robo, arm, xi, xc, yc):
     y = yc+0.059
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.145
+    request.ik_request.pose_stamped.pose.position.z = -0.13
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -130,7 +130,7 @@ def make2(robo, arm, xi, upper, mid, center_x = 0.691, center_y = 0.259):
         xi = center_x + .15
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.145
+    request.ik_request.pose_stamped.pose.position.z = -0.13
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -157,7 +157,7 @@ def make3(robo, arm, xi, upper, xc= 0.691,yc= 0.259):
 
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.145
+    request.ik_request.pose_stamped.pose.position.z = -0.13
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -179,7 +179,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 0:
         request.ik_request.pose_stamped.pose.position.x = xc
         request.ik_request.pose_stamped.pose.position.y = yc
-        request.ik_request.pose_stamped.pose.position.z = -0.145
+        request.ik_request.pose_stamped.pose.position.z = -0.13
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -187,7 +187,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 1:
         request.ik_request.pose_stamped.pose.position.x = xc+(0.0788/2.0)
         request.ik_request.pose_stamped.pose.position.y = yc
-        request.ik_request.pose_stamped.pose.position.z = -0.145
+        request.ik_request.pose_stamped.pose.position.z = -0.13
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -195,7 +195,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 2:
         request.ik_request.pose_stamped.pose.position.x = xc+0.0788
         request.ik_request.pose_stamped.pose.position.y = yc
-        request.ik_request.pose_stamped.pose.position.z = -0.145
+        request.ik_request.pose_stamped.pose.position.z = -0.13
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -203,7 +203,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 3:
         request.ik_request.pose_stamped.pose.position.x = xc+0.0788
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
-        request.ik_request.pose_stamped.pose.position.z = -0.145
+        request.ik_request.pose_stamped.pose.position.z = -0.13
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -211,7 +211,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 4:
         request.ik_request.pose_stamped.pose.position.x = xc
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
-        request.ik_request.pose_stamped.pose.position.z = -0.145
+        request.ik_request.pose_stamped.pose.position.z = -0.13
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -219,7 +219,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 5:
         request.ik_request.pose_stamped.pose.position.x = xc+(0.1577/2.0)
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
-        request.ik_request.pose_stamped.pose.position.z = -0.145
+        request.ik_request.pose_stamped.pose.position.z = -0.13
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -227,7 +227,7 @@ def make4(robo, arm, xi, xc= 0.691,yc= 0.259):
     if xi == 6:
         request.ik_request.pose_stamped.pose.position.x = xc+0.1577
         request.ik_request.pose_stamped.pose.position.y = yc + 0.059
-        request.ik_request.pose_stamped.pose.position.z = -0.145
+        request.ik_request.pose_stamped.pose.position.z = -0.13
         request.ik_request.pose_stamped.pose.orientation.x = 0.0
         request.ik_request.pose_stamped.pose.orientation.y = 1.0
         request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -253,11 +253,11 @@ def make5(robo, arm, xi, upper, mid, xc=0.6467, yc=0.2):
     elif mid == True:
         y=yc
     else:
-        y= round(-30*((xi-((xc+0.0443)*1.1))**2) +yc +0.059, 3)
+        y= round(-30*((xi-((xc+0.0344)*1.1))**2) + yc + 0.071, 3)
 
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.145
+    request.ik_request.pose_stamped.pose.position.z = -0.13
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -290,7 +290,7 @@ def make6(robo, arm, xi, upper, center_x = 0.6566, center_y = 0.2235):
         y = 30*(xi - ((center_x+0.0344)*1.1))**2 + center_y - 0.0355
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.145
+    request.ik_request.pose_stamped.pose.position.z = -0.13
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -317,7 +317,7 @@ def make7(robo, arm, xi, upper, xc= 0.6467,yc= 0.2):
         y = yc+0.059
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.145
+    request.ik_request.pose_stamped.pose.position.z = -0.13
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -349,7 +349,7 @@ def make8(robo, arm, xi, upper, mid, center_x = 0.6566, center_y = 0.2235):
         y = 30 * (xi-(center_x+0.0344))**2 + center_y - 0.0355
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.145
+    request.ik_request.pose_stamped.pose.position.z = -0.13
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -379,7 +379,7 @@ def make9(robo, arm, xi, upper, mid, center_x = 0.6566, center_y = 0.2235):
         y = center_y + 0.0355
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
-    request.ik_request.pose_stamped.pose.position.z = -0.145
+    request.ik_request.pose_stamped.pose.position.z = -0.13
     request.ik_request.pose_stamped.pose.orientation.x = 0.0
     request.ik_request.pose_stamped.pose.orientation.y = 1.0
     request.ik_request.pose_stamped.pose.orientation.z = 0.0
@@ -524,18 +524,28 @@ while not rospy.is_shutdown():
             originx_board = 0.687
             originy_board =  0.1485
             #boardSizeHori = 0.9
-            resolution = 20
+            resolution = 80
             coords = []
             scaling_fact = window_size/boardSizeVert
+            print("LOWER BOUND")
+            print(graphcenx - window_size)
+            print("UPPER BOUND")
+            print(graphcenx + window_size)
             for xi in np.linspace(graphcenx - window_size, graphcenx + window_size, resolution):
                 y = None
                 if string[0] == 'y':
-                    y = eval(re.sub("x", str(xi), string)[2:])
+                    print("y = ")
+                    print(re.sub("x", '('+ str(xi) +')', string)[2:])
+                    y = eval(re.sub("x", '('+ str(xi)+')', string)[2:])
                 else:
-                    y = eval(re.sub("x", str(xi), string))
-                if np.abs(y) <= window_size:
+                    y = eval(re.sub("x", '('+ str(xi)+')', string))
+                if np.abs(y) <= window_size or not np.isnan(y):
+                    print(xi)
+                    print(y)
                     xval = -(y/scaling_fact) + originx_board
                     yval = (xi/scaling_fact) + originy_board
+                    print(xval)
+                    print(yval)
                     if xval < minx:
                         xval = minx
                     elif xval> maxx:
@@ -546,6 +556,106 @@ while not rospy.is_shutdown():
                         yval = maxy
                     coords.append((xval, yval))
             # Find max of all values in tuple, then do max_val/boardSizeVert to get scaling_fact. divide all numbers by this scaling_fact
+            request = GetPositionIKRequest()
+            request.ik_request.group_name = arm + "_arm"
+            # If a Sawyer does not have a gripper, replace '_gripper_tip' with '_wrist' instead
+            link = arm + "_gripper"
+            if robo == 'sawyer':
+                link += '_tip'
+            request.ik_request.ik_link_name = link
+            request.ik_request.attempts = 20
+            request.ik_request.pose_stamped.header.frame_id = "base"
+            request.ik_request.pose_stamped.pose.position.x = originx_board
+            request.ik_request.pose_stamped.pose.position.y = originy_board
+            request.ik_request.pose_stamped.pose.position.z = -0.05
+            request.ik_request.pose_stamped.pose.orientation.x = 0.0
+            request.ik_request.pose_stamped.pose.orientation.y = 1.0
+            request.ik_request.pose_stamped.pose.orientation.z = 0.0
+            request.ik_request.pose_stamped.pose.orientation.w = 0.0
+            try:
+                # Send the request to the service
+                response = compute_ik(request)
+
+                # Print the response HERE
+                # print(response)
+                group = MoveGroupCommander(arm + "_arm")
+
+                # Setting position and orientation target
+                group.set_pose_target(request.ik_request.pose_stamped)
+
+
+                # Plan IK and execute
+                group.go()
+                
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
+            request = GetPositionIKRequest()
+            request.ik_request.group_name = arm + "_arm"
+            # If a Sawyer does not have a gripper, replace '_gripper_tip' with '_wrist' instead
+            link = arm + "_gripper"
+            if robo == 'sawyer':
+                link += '_tip'
+            z = -0.13
+            request.ik_request.ik_link_name = link
+            request.ik_request.attempts = 20
+            request.ik_request.pose_stamped.header.frame_id = "base"
+            request.ik_request.pose_stamped.pose.position.x = originx_board
+            request.ik_request.pose_stamped.pose.position.y = originy_board
+            request.ik_request.pose_stamped.pose.position.z = z
+            request.ik_request.pose_stamped.pose.orientation.x = 0.0
+            request.ik_request.pose_stamped.pose.orientation.y = 1.0
+            request.ik_request.pose_stamped.pose.orientation.z = 0.0
+            request.ik_request.pose_stamped.pose.orientation.w = 0.0
+            try:
+                # Send the request to the service
+                response = compute_ik(request)
+
+                # Print the response HERE
+                # print(response)
+                group = MoveGroupCommander(arm + "_arm")
+
+                # Setting position and orientation target
+                group.set_pose_target(request.ik_request.pose_stamped)
+
+
+                # Plan IK and execute
+                group.go()
+                
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
+            request = GetPositionIKRequest()
+            request.ik_request.group_name = arm + "_arm"
+            # If a Sawyer does not have a gripper, replace '_gripper_tip' with '_wrist' instead
+            link = arm + "_gripper"
+            if robo == 'sawyer':
+                link += '_tip'
+            request.ik_request.ik_link_name = link
+            request.ik_request.attempts = 20
+            request.ik_request.pose_stamped.header.frame_id = "base"
+            request.ik_request.pose_stamped.pose.position.x = originx_board
+            request.ik_request.pose_stamped.pose.position.y = originy_board
+            request.ik_request.pose_stamped.pose.position.z = -0.05
+            request.ik_request.pose_stamped.pose.orientation.x = 0.0
+            request.ik_request.pose_stamped.pose.orientation.y = 1.0
+            request.ik_request.pose_stamped.pose.orientation.z = 0.0
+            request.ik_request.pose_stamped.pose.orientation.w = 0.0
+            try:
+                # Send the request to the service
+                response = compute_ik(request)
+
+                # Print the response HERE
+                # print(response)
+                group = MoveGroupCommander(arm + "_arm")
+
+                # Setting position and orientation target
+                group.set_pose_target(request.ik_request.pose_stamped)
+
+
+                # Plan IK and execute
+                group.go()
+                
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
             for x, y in coords:
                 request = GetPositionIKRequest()
                 request.ik_request.group_name = arm + "_arm"
@@ -553,7 +663,7 @@ while not rospy.is_shutdown():
                 link = arm + "_gripper"
                 if robo == 'sawyer':
                     link += '_tip'
-                z = -0.14
+                z = -0.13
                 if x == minx or x == maxx or y== miny or y ==maxy:
                     z=-0.05
                 request.ik_request.ik_link_name = link
@@ -580,7 +690,7 @@ while not rospy.is_shutdown():
 
                     # Plan IK and execute
                     group.go()
-                    rospy.sleep(1.0)
+                    
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
         else:
@@ -623,7 +733,7 @@ while not rospy.is_shutdown():
 
                     # Plan IK and execute
                     group.go()
-                    rospy.sleep(1.0)
+                    
                 except rospy.ServiceException, e:
                     print "Service call failed: %s"%e
 
@@ -645,7 +755,7 @@ while not rospy.is_shutdown():
 
                         # Plan IK and execute
                         group.go()
-                        rospy.sleep(1.0)
+                        
                     except rospy.ServiceException, e:
                         print "Service call failed: %s"%e
                     for xi in np.linspace(center_x + 0.0688, center_x, 3):
@@ -664,7 +774,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x, center_x + 0.0344, 3):
@@ -683,7 +793,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -703,7 +813,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -726,7 +836,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x + 0.0688, center_x + 0.1379, 3):
@@ -745,7 +855,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x + 0.1379, center_x + 0.0688, 3):
@@ -764,7 +874,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -784,7 +894,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -805,7 +915,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x, center_x+0.1577, 3):
@@ -824,7 +934,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                 elif digit == 6:
@@ -846,7 +956,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x + 0.0344, center_x + 0.1035, 3):
@@ -865,7 +975,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x + 0.1035, center_x + 0.1379, 3):
@@ -884,7 +994,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -904,7 +1014,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -924,12 +1034,12 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                 elif digit == 5:
-                    for xi in np.linspace(center_y+0.059, center_y, 3):
+                    for xi in np.linspace(center_y+0.071, center_y, 3):
                         request = make5(robo, arm, xi, True, False, center_x, center_y)
                         try:
                             # Send the request to the service
@@ -945,10 +1055,10 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
-                    for xi in np.linspace(center_x, center_x+0.0691, 3):
+                    for xi in np.linspace(center_x, center_x+0.0549, 3):
                         request = make5(robo, arm, xi, False, True, center_x, center_y)
                         try:
                             # Send the request to the service
@@ -964,10 +1074,10 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
-                    for xi in np.linspace(center_x+0.0691, center_x+0.1577, 5):
+                    for xi in np.linspace(center_x+0.0572, center_x+0.1559, 5):
                         request = make5(robo, arm, xi, False, False, center_x, center_y)
                         try:
                             # Send the request to the service
@@ -983,7 +1093,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                 elif digit == 4:
@@ -1003,7 +1113,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                 elif digit == 3:
@@ -1023,7 +1133,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x+0.0345, center_x+0.0691, 3):
@@ -1042,7 +1152,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x+0.0691, center_x+0.1134, 3):
@@ -1061,7 +1171,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                 elif digit == 2:
@@ -1083,7 +1193,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x, center_x + 0.05, 3):
@@ -1102,7 +1212,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_x + 0.05, center_x + 0.15, 3):
@@ -1121,7 +1231,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                     for xi in np.linspace(center_y - 0.05, center_y + 0.05, 3):
@@ -1140,7 +1250,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -1162,7 +1272,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
                 elif digit == 0:
@@ -1186,7 +1296,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -1210,7 +1320,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -1236,7 +1346,7 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
@@ -1260,10 +1370,45 @@ while not rospy.is_shutdown():
 
                             # Plan IK and execute
                             group.go()
-                            rospy.sleep(1.0)
+                            
 
                         except rospy.ServiceException, e:
                             print "Service call failed: %s"%e
+            request = GetPositionIKRequest()
+            request.ik_request.group_name = arm + "_arm"
+            # If a Sawyer does not have a gripper, replace '_gripper_tip' with '_wrist' instead
+            link = arm + "_gripper"
+            if robo == 'sawyer':
+                link += '_tip'
+            request.ik_request.ik_link_name = link
+            request.ik_request.attempts = 20
+            request.ik_request.pose_stamped.header.frame_id = "base"
+            request.ik_request.pose_stamped.pose.position.x = round(center_x, 3)
+            request.ik_request.pose_stamped.pose.position.y = round(center_y, 3)
+            request.ik_request.pose_stamped.pose.position.z = -0.05
+            request.ik_request.pose_stamped.pose.orientation.x = 0.0
+            request.ik_request.pose_stamped.pose.orientation.y = 1.0
+            request.ik_request.pose_stamped.pose.orientation.z = 0.0
+            request.ik_request.pose_stamped.pose.orientation.w = 0.0
+            try:
+                # Send the request to the service
+                response = compute_ik(request)
+
+                # Print the response HERE
+                # print(response)
+                group = MoveGroupCommander(arm + "_arm")
+
+                # Setting position and orientation target
+                group.set_pose_target(request.ik_request.pose_stamped)
+
+
+                # Plan IK and execute
+                group.go()
+                
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
+
+
     except KeyboardInterrupt:
         print('Keyboard Interrupt, exiting')
         break
