@@ -507,8 +507,18 @@ while not rospy.is_shutdown():
         # When done, get rid of windows and start over
         # cv2.destroyAllWindows()
         raw_input('Press [ Enter ]: ')
-        center_x = 0.718
+        position = hopefully_dict["position"]
+        center_x = 0.708
         center_y = -0.091
+        x_cam = float(position["top_left_x"]) + float(position["width"])
+        y_cam = float(position["top_left_y"])
+        print("xcam " + str(x_cam))
+        print("ycam " + str(y_cam))
+        center_x = (9*(10**-6)*(y_cam**2))-(0.0011*y_cam)+0.698
+        center_y = (10**-7)*(x_cam**2)+(0.001*x_cam)-0.7944
+        center_x -= 0.02
+        print('center_x: ' + str(center_x))
+        print('center_y: ' + str(center_y))
         if number == 'eq':
             #need board size in coordinates, origin for calculating offset, window size we want to show, aspect ratio
             # x = -y and y = x in the robot's frame to draw the function facing us
@@ -700,7 +710,7 @@ while not rospy.is_shutdown():
                 digit = int(digit)
                 print(digit)
                 print('this is the digit')
-                center_y += 0.12
+                center_y += 0.1
                 center_x = center_x
                 z = -0.05
                 request = GetPositionIKRequest()
