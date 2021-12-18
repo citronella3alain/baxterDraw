@@ -21,6 +21,8 @@ from geometry_msgs.msg import PoseStamped
 from moveit_commander import MoveGroupCommander
 from numpy import linalg
 import sys
+import moveit_commander
+from copy import deepcopy
 # from process_latex import process_sympy
 # import sympy
 
@@ -520,6 +522,9 @@ while not rospy.is_shutdown():
         print('center_x: ' + str(center_x))
         print('center_y: ' + str(center_y))
         if number == 'eq':
+            group = MoveGroupCommander(arm + "_arm")
+            group.allow_replanning(True)
+            waypoints = []
             #need board size in coordinates, origin for calculating offset, window size we want to show, aspect ratio
             # x = -y and y = x in the robot's frame to draw the function facing us
             #TODO:
@@ -589,7 +594,6 @@ while not rospy.is_shutdown():
                 # Print the response HERE
                 # print(response)
                 group = MoveGroupCommander(arm + "_arm")
-
                 # Setting position and orientation target
                 group.set_pose_target(request.ik_request.pose_stamped)
 
@@ -666,6 +670,9 @@ while not rospy.is_shutdown():
                 
             except rospy.ServiceException, e:
                 print "Service call failed: %s"%e
+            group = MoveGroupCommander(arm + "_arm")
+            group.allow_replanning(True)
+            waypoints =[]
             for x, y in coords:
                 request = GetPositionIKRequest()
                 request.ik_request.group_name = arm + "_arm"
@@ -686,23 +693,19 @@ while not rospy.is_shutdown():
                 request.ik_request.pose_stamped.pose.orientation.y = 1.0
                 request.ik_request.pose_stamped.pose.orientation.z = 0.0
                 request.ik_request.pose_stamped.pose.orientation.w = 0.0
-                try:
-                    # Send the request to the service
-                    response = compute_ik(request)
-
-                    # Print the response HERE
-                    # print(response)
-                    group = MoveGroupCommander(arm + "_arm")
-
-                    # Setting position and orientation target
-                    group.set_pose_target(request.ik_request.pose_stamped)
-
-
-                    # Plan IK and execute
-                    group.go()
-                    
-                except rospy.ServiceException, e:
-                    print "Service call failed: %s"%e
+                waypoints.append(request.ik_request.pose_stamped.pose)
+            try:
+                robot = moveit_commander
+                (plan, fraction) = group.compute_cartesian_path(waypoints, 0.0001, 0.0, True)
+                print(fraction)
+                robot = moveit_commander.RobotCommander()
+                plan = group.retime_trajectory(robot.get_current_state(), plan, 1.0)
+                group.execute(plan, wait=True)
+                rospy.sleep(0.1)
+                group.stop()
+                
+            except rospy.ServiceException, e:
+                print "Service call failed: %s"%e
         else:
             for digit in str(number):
                 ### Lift hand
