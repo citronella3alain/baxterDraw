@@ -38,17 +38,12 @@ def make0(robo, arm, xi, upper, center_x, center_y):
     request.ik_request.attempts = 20
     request.ik_request.pose_stamped.header.frame_id = "base"
 
-    # print('Opening...')
-    # right_gripper.open()
-    # 
-    # print('Done!')
     b = 0.048
     a = 0.068
     k = center_y #0.193
     h = center_x+0.073
     xi = np.round(xi, 3)
     if upper == True:
-        #math equatio
         y = np.round((np.sqrt((b**2)-((b**2/a**2)*((xi-h)**2))))+k, 3)
         print(xi)
         print(y)
@@ -56,9 +51,7 @@ def make0(robo, arm, xi, upper, center_x, center_y):
             y = center_y
             if xi == center_x + 0.073:
                 y = center_y + 0.1
-        #y = np.round(((b/a)*np.sqrt(((a**2)-((xi-h)**2)))+k), 3)
     else:
-        print("im here")
         y = np.round((-1*np.sqrt((b**2)-((b**2/a**2)*((xi-h)**2))))+k, 3)
         print(xi)
         print(y)
@@ -66,9 +59,7 @@ def make0(robo, arm, xi, upper, center_x, center_y):
             y = center_y
             if xi == center_x + 0.073:
                 y = center_y -0.1
-        #y = np.round(((b/a)*-np.sqrt(((a**2)-((xi-h)**2)))+k), 3)
     # Set the desired orientation for the end effector HERE
-    #switch = not switch
     request.ik_request.pose_stamped.pose.position.x = xi
     request.ik_request.pose_stamped.pose.position.y = y
     request.ik_request.pose_stamped.pose.position.z = -0.13
@@ -118,14 +109,10 @@ def make2(robo, arm, xi, upper, mid, center_x = 0.691, center_y = 0.259):
     if upper == True and mid == True:
         y = -np.sqrt((-xi+center_x)/-20) + center_y
     elif upper == True:
-        # y = -20*((xi-center_x)**2)+center_y
         y = np.sqrt((-xi+center_x)/-20) + center_y
     elif mid == True:
-        # y = xi-.741+.209
-        # y = xi - center_x - 0.05 + center_y -0.05
         y = -xi + center_y +.05 + center_x + .05
     else:
-        # y = center_y -0.15
         y = xi
         xi = center_x + .15
     request.ik_request.pose_stamped.pose.position.x = xi
@@ -955,8 +942,7 @@ while not rospy.is_shutdown():
                 # Send the request to the service
                 response = compute_ik(request)
 
-                # Print the response HERE
-                # print(response)
+
                 group = MoveGroupCommander(arm + "_arm")
 
                 # Setting position and orientation target
